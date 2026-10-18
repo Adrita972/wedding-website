@@ -4,19 +4,10 @@
 
 The WhatsApp invitation system has been successfully integrated into your wedding website.
 
-## 📱 Your WhatsApp Details
-- **Number**: +8801357000757
-- **Contact Link**: https://wa.me/8801357000757
-
----
 
 ## 🚀 Getting Started (3 Simple Steps)
 
-### Step 1: Start the Server
-```bash
-cd "C:\Users\Adrita\Documents\wedding website"
-npm start
-```
+
 
 3. ⚠️ **IMPORTANT**: Change this password immediately in Settings!
 

@@ -1,0 +1,5 @@
+{
+  "whatsappNumber": "8801357000757",
+  "invitationUrl": "http://localhost:3000/index.html",
+  "invitationMessage": "Hello {{guest_name}}!\n\nYou are warmly invited to our special event.\n\nPlease visit our invitation website for all the details:\n\n{{invitation_url}}\n\nWe would be delighted to have you join us!\n\nBest wishes."
+}

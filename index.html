@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Royal Wedding Celebration | Mariam &amp; Ahmed</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&amp;family=Cinzel:wght@400;600;700;800;900&amp;family=Cinzel+Decorative:wght@400;700;900&amp;family=Great+Vibes&amp;family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300&amp;family=Amiri:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- FontAwesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ivory: {
+              50: '#fdfcf9',
+              100: '#faf6ee',
+              200: '#f5eee0',
+              300: '#ebdcc5',
+              400: '#d9be9b'
+            },
+            emerald: {
+              800: '#1e4331',
+              900: '#143123',
+              950: '#0d2218'
+            },
+            gold: {
+              200: '#faecc8',
+              300: '#f3db9f',
+              400: '#e5c378',
+              500: '#d4af37',
+              600: '#b89028',
+              700: '#8e6c1a',
+              800: '#694f13'
+            },
+            charcoal: {
+              800: '#2b2622',
+              900: '#1c1917',
+              950: '#12100e'
+            }
+          },
+          fontFamily: {
+            script: ['"Great Vibes"', '"Alex Brush"', 'cursive'],
+            serif: ['"Cinzel"', 'serif'],
+            decorative: ['"Cinzel Decorative"', 'serif'],
+            sans: ['"Montserrat"', 'sans-serif'],
+            arabic: ['"Amiri"', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Opulent Luxury Styling */
+    body {
+      background-color: #f7f3ec;
+      background-image: 
+        radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 10% 40%, rgba(20, 49, 35, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 90% 70%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+      color: #2b2622;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .gold-shimmer-text {
+      background: linear-gradient(135deg, #c5a059 0%, #faecc8 35%, #d4af37 60%, #9e751f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gold-foil-bg {
+      background: linear-gradient(135deg, #d4af37 0%, #f7e7bc 40%, #c5a059 70%, #9e751f 100%);
+    }
+
+    .emerald-royal-bg {
+      background: linear-gradient(145deg, #183e2c 0%, #102d20 55%, #081b12 100%);
+    }
+
+    .wax-seal {
+      background: radial-gradient(circle at 35% 32%, #26593f, #143524 55%, #091a11 95%);
+      box-shadow: 
+        0 12px 30px rgba(13, 34, 24, 0.5),
+        inset 2px 2px 5px rgba(250, 236, 200, 0.4),
+        inset -3px -3px 8px rgba(0, 0, 0, 0.7);
+      position: relative;
+    }
+
+    .wax-seal::after {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border-radius: 9999px;
+      border: 1.5px dashed rgba(229, 195, 120, 0.65);
+      pointer-events: none;
+    }
+
+    /* Envelope unfolding */
+    #envelope-screen {
+      transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.9s ease;
+    }
+
+    .envelope-flap {
+      clip-path: polygon(0% 0%, 50% 55%, 100% 0%);
+      transform-origin: top center;
+      transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .envelope-opened .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 5;
+    }
+
+    .letter-paper {
+      box-shadow: 
+        0 25px 60px -15px rgba(19, 39, 29, 0.12),
+        0 0 0 1px rgba(212, 175, 55, 0.35);
+      background: #fffdfa;
+      position: relative;
+    }
+
+    /* Luxury Arch Geometry for image */
+    .arch-frame {
+      border-top-left-radius: 9999px;
+      border-top-right-radius: 9999px;
+      border-bottom-left-radius: 1.5rem;
+      border-bottom-right-radius: 1.5rem;
+    }
+
+    /* Canvas */
+    #petals-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    @keyframes pulse-subtle {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+    .animate-pulse-subtle {
+      animation: pulse-subtle 2.8s ease-in-out infinite;
+    }
+
+    @keyframes bounce-slow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(7px); }
+    }
+    .animate-bounce-slow {
+      animation: bounce-slow 2.2s infinite ease-in-out;
+    }
+
+    /* Gold ornate border corners */
+    .gold-corner-tl {
+      border-top: 2px solid #d4af37;
+      border-left: 2px solid #d4af37;
+    }
+    .gold-corner-tr {
+      border-top: 2px solid #d4af37;
+      border-right: 2px solid #d4af37;
+    }
+    .gold-corner-bl {
+      border-bottom: 2px solid #d4af37;
+      border-left: 2px solid #d4af37;
+    }
+    .gold-corner-br {
+      border-bottom: 2px solid #d4af37;
+      border-right: 2px solid #d4af37;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen selection:bg-gold-200 selection:text-emerald-950">
+<!-- Interactive Petals & Golden Shimmer Canvas Overlay -->
+<canvas height="3804" id="petals-canvas" width="1280"></canvas>
+<!-- ============================================== -->
+<!-- 1. FULLSCREEN WAX SEAL ENVELOPE OVERLAY -->
+<!-- ============================================== -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/80 backdrop-blur-md transition-all duration-1000 p-4" id="envelope-overlay">
+<!-- Physical Envelope Container -->
+<div class="relative w-full max-w-md sm:max-w-lg aspect-[4/3] bg-gradient-to-b from-[#faf5eb] to-[#f3ebd9] rounded-2xl shadow-2xl overflow-hidden border-2 border-gold-400/50 flex flex-col justify-between p-6 sm:p-8 text-center" id="envelope-box">
+<!-- Top Decorative Envelope Flap Graphic (Backing) -->
+<div class="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[#ede1cb] to-[#f7eedc] envelope-flap border-b border-gold-400/60 shadow-inner z-10"></div>
+<!-- Gold foiled border inner line -->
+<div class="absolute inset-3 rounded-xl border border-gold-500/30 pointer-events-none z-10"></div>
+<!-- Envelope Header & Monogram Hint -->
+<div class="relative z-20 pt-3">
+<span class="inline-block text-[11px] uppercase tracking-[0.35em] font-serif text-emerald-900 font-semibold mb-1">
+          Exclusive Royal Invitation
+        </span>
+<h2 class="font-serif text-xl sm:text-2xl text-charcoal-900 font-bold tracking-widest">
+          MARIAM &amp; AHMED
+        </h2>
+<div class="flex items-center justify-center gap-3 mt-2">
+<div class="h-[1px] w-12 bg-gradient-to-r from-transparent to-gold-600"></div>
+<i class="fa-solid fa-gem text-gold-600 text-[10px]"></i>
+<div class="h-[1px] w-12 bg-gradient-to-l from-transparent to-gold-600"></div>
+</div>
+</div>
+<!-- Wax Seal Button (Click to Open) -->
+<div class="relative z-30 my-auto flex flex-col items-center justify-center">
+<button aria-label="Open wedding invitation" class="group relative wax-seal w-24 h-24 sm:w-28 sm:h-28 rounded-full flex flex-col items-center justify-center cursor-pointer transition-all duration-300 transform hover:scale-105 active:scale-95 animate-pulse-subtle focus:outline-none focus:ring-4 focus:ring-gold-400/50 shadow-2xl" id="open-envelope-btn">
+<!-- Outer Wax Imperfection Ring -->
+<div class="absolute inset-0 rounded-full border-4 border-emerald-950/40 opacity-80"></div>
+<!-- Engraved Monogram Initials -->
+<span class="font-serif text-gold-300 text-2xl sm:text-3xl font-bold tracking-tighter drop-shadow-[0_2px_3px_rgba(0,0,0,0.8)]">
+            M&amp;A
+          </span>
+<span class="text-[9px] font-sans uppercase tracking-widest text-gold-300/90 mt-0.5 font-semibold">OPEN</span>
+</button>
+<p class="text-xs font-serif text-emerald-950 tracking-wider mt-4 animate-bounce font-medium">
+<i class="fa-solid fa-hand-pointer mr-1 text-gold-600"></i> Tap seal to unseal royal invitation
+        </p>
+</div>
+<!-- Envelope Bottom Ribbon Decor -->
+<div class="relative z-20 text-[11px] font-serif text-emerald-900/80 tracking-widest pb-1 font-semibold">
+        THE WEDDING CELEBRATION • SAVE THE DATE
+      </div>
+</div>
+</div>
+<!-- ============================================== -->
+<!-- 2. FLOATING WHATSAPP CONTACT BUTTON -->
+<!-- ============================================== -->
+<a href="https://wa.me/8801357000757" target="_blank" rel="noopener noreferrer"
+   class="fixed bottom-24 right-6 z-40 w-14 h-14 rounded-full bg-green-500 text-white shadow-2xl border-2 border-white flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 group"
+   id="whatsapp-contact-btn"
+   title="Contact us on WhatsApp"
+   aria-label="Contact on WhatsApp">
+  <i class="fab fa-whatsapp text-2xl group-hover:rotate-12 transition-transform"></i>
+</a>
+
+<!-- ============================================== -->
+<!-- 3. FLOATING BACKGROUND AUDIO TOGGLE -->
+<!-- ============================================== -->
+<div class="fixed bottom-6 right-6 z-40 flex items-center gap-3">
+<div class="hidden sm:block opacity-0 transition-opacity duration-300 emerald-royal-bg text-gold-200 text-xs px-3 py-1.5 rounded-full font-serif shadow-lg border border-gold-500/40 backdrop-blur-sm pointer-events-none" id="audio-tooltip">
+      Wedding Melody
+    </div>
+<button class="w-12 h-12 rounded-full emerald-royal-bg text-gold-300 shadow-xl border border-gold-400/60 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 group" id="audio-toggle-btn" title="Toggle Music">
+<i class="fa-solid fa-volume-xmark text-lg group-hover:rotate-12 transition-transform" id="audio-icon"></i>
+</button>
+</div>
+<!-- Audio Element -->
+<audio id="bg-audio" loop="" preload="auto">
+<source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-112199.mp3" type="audio/mpeg"/>
+</audio>
+<!-- ============================================== -->
+<!-- 3. MAIN INVITATION WEBPAGE CONTENT -->
+<!-- ============================================== -->
+<main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 md:py-20 relative">
+<!-- Top Luxury Border Frame -->
+<div class="letter-paper rounded-3xl border border-gold-400/40 shadow-2xl p-6 sm:p-12 md:p-16 relative overflow-hidden bg-gradient-to-b from-[#fffdfa] via-[#fcfaf5] to-[#fbf7ee]">
+<!-- Double Inset Gold Border -->
+<div class="absolute inset-2 sm:inset-3 rounded-[22px] border border-gold-400/30 pointer-events-none"></div>
+<!-- Delicate Victorian Corner Accents -->
+<div class="absolute top-4 left-4 w-12 h-12 gold-corner-tl rounded-tl-xl pointer-events-none"></div>
+<div class="absolute top-4 right-4 w-12 h-12 gold-corner-tr rounded-tr-xl pointer-events-none"></div>
+<div class="absolute bottom-4 left-4 w-12 h-12 gold-corner-bl rounded-bl-xl pointer-events-none"></div>
+<div class="absolute bottom-4 right-4 w-12 h-12 gold-corner-br rounded-br-xl pointer-events-none"></div>
+<!-- Top Section: Header & Arabic Bismillah -->
+<header class="text-center space-y-4 pt-2">
+<div class="inline-flex items-center justify-center gap-3">
+<span class="h-[1px] w-8 sm:w-20 bg-gradient-to-r from-transparent via-gold-500 to-gold-600"></span>
+<span class="text-xs sm:text-sm uppercase tracking-[0.4em] font-serif font-bold text-emerald-900">
+            The Wedding Celebration
+          </span>
+<span class="h-[1px] w-8 sm:w-20 bg-gradient-to-l from-transparent via-gold-500 to-gold-600"></span>
+</div>
+<!-- Arabic Calligraphy / Blessing -->
+<div class="py-2">
+<p class="font-arabic text-3xl sm:text-4xl md:text-5xl text-emerald-950 tracking-wide leading-relaxed font-normal" dir="rtl">
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+          </p>
+<p class="text-xs sm:text-sm font-serif text-gold-700 italic mt-1 font-semibold">
+            In the name of Allah, Most Gracious, Most Merciful
+          </p>
+</div>
+<!-- Tagline / Quranic Inspiration -->
+<p class="text-sm sm:text-base font-serif text-emerald-900 tracking-wider italic font-medium max-w-lg mx-auto">
+          “And among His signs is that He created for you mates from among yourselves, that you may find tranquility in them”
+        </p>
+<!-- Illustration Integration: Opulent Royal Arch Frame -->
+<div class="flex justify-center items-center py-4">
+<div class="relative p-2 sm:p-3 bg-gradient-to-b from-[#e5c378] via-[#faf0d9] to-[#d4af37] arch-frame shadow-[0_16px_40px_rgba(20,49,35,0.18)] max-w-xs sm:max-w-md w-full">
+<div class="arch-frame overflow-hidden bg-white border border-gold-400/50">
+<img alt="Mariam &amp; Ahmed Wedding Celebration" class="w-full h-auto object-cover object-top hover:scale-102 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbHBREPPNDKermb60eaH-M1mPwp2N9dzzNof9EKQhRI4i8qlGhYQHE_rHkj99_Ncn-Sc4HyGlgxjt3C6NEu_nvzH_WFzUny1nx3d0OlfCs0n79TzNelSzUr42pXALQDX-5WVpyasFZ-7p4lSzH4Wc6momDYt0lmUsFiOk9RgMErN5rxEpTN5WGNSEsTyjNc7lz5mM_9unhkXcp07fHJZxcXYKegCL86Nu3UshcXNzJvBLyEjNq40-eWSqIvjyTdtW2Mg"/>
+</div>
+<!-- Gilded Emblem Badge -->
+<div class="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full emerald-royal-bg border border-gold-400/80 shadow-md">
+<span class="font-serif text-[11px] tracking-widest uppercase text-gold-300 font-semibold flex items-center gap-1.5">
+<i class="fa-solid fa-star text-[9px] text-gold-400"></i>
+                Sacred Union
+                <i class="fa-solid fa-star text-[9px] text-gold-400"></i>
+</span>
+</div>
+</div>
+</div>
+<!-- Couple Names in Regal Typography -->
+<div class="space-y-1 pt-3">
+<h1 class="font-script text-5xl sm:text-7xl md:text-8xl text-emerald-950 tracking-tight py-1 font-normal drop-shadow-sm">
+            Mariam <span class="text-gold-600 font-sans text-3xl sm:text-4xl md:text-5xl font-light">&amp;</span> Ahmed
+          </h1>
+<p class="font-serif text-xs sm:text-sm tracking-[0.3em] text-stone-600 uppercase font-semibold">
+            Together with their families
+          </p>
+</div>
+<!-- Cordial Invitation Note -->
+<div class="max-w-xl mx-auto pt-3 pb-2 text-charcoal-800 text-sm sm:text-base leading-relaxed font-light">
+          Request the pleasure of your auspicious company and prayers to celebrate their solemn matrimony and grand reception.
+        </div>
+<!-- Animated Scroll Down Indicator -->
+<div class="pt-4 flex flex-col items-center">
+<a class="inline-flex flex-col items-center text-xs font-serif uppercase tracking-widest text-emerald-900/80 hover:text-emerald-950 transition-colors" href="#countdown-section">
+<span>Scroll Down</span>
+<i class="fa-solid fa-angle-down mt-1.5 text-gold-600 animate-bounce-slow text-sm"></i>
+</a>
+</div>
+</header>
+<!-- Gilded Filigree Divider -->
+<div class="my-10 flex items-center justify-center gap-3 max-w-sm mx-auto">
+<div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gold-400 to-gold-600"></div>
+<i class="fa-solid fa-crown text-gold-600 text-sm"></i>
+<div class="h-[1px] flex-1 bg-gradient-to-l from-transparent via-gold-400 to-gold-600"></div>
+</div>
+<!-- ============================================== -->
+<!-- 4. LIVE COUNTDOWN TIMER -->
+<!-- ============================================== -->
+<section class="text-center my-10" id="countdown-section">
+<span class="text-xs uppercase tracking-[0.35em] font-serif text-gold-700 font-bold block mb-2">
+          Counting Down To The Sacred Moment
+        </span>
+<h3 class="font-serif text-2xl sm:text-3xl text-emerald-950 font-bold mb-6 tracking-wide">
+          Monday, May 01, 2028
+        </h3>
+<!-- Timer Grid with Opulent Gold & Ivory Cards -->
+<div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-lg mx-auto">
+<!-- Days -->
+<div class="bg-gradient-to-b from-white to-ivory-100 border border-gold-400/50 rounded-2xl p-3 sm:p-5 shadow-[0_8px_20px_rgba(20,49,35,0.06)] hover:border-gold-500 transition-all hover:scale-102">
+<span class="block font-serif text-2xl sm:text-4xl md:text-5xl font-bold text-emerald-950" id="days">00</span>
+<span class="text-[10px] sm:text-xs uppercase tracking-wider text-gold-700 mt-1 block font-semibold">Days</span>
+</div>
+<!-- Hours -->
+<div class="bg-gradient-to-b from-white to-ivory-100 border border-gold-400/50 rounded-2xl p-3 sm:p-5 shadow-[0_8px_20px_rgba(20,49,35,0.06)] hover:border-gold-500 transition-all hover:scale-102">
+<span class="block font-serif text-2xl sm:text-4xl md:text-5xl font-bold text-emerald-950" id="hours">00</span>
+<span class="text-[10px] sm:text-xs uppercase tracking-wider text-gold-700 mt-1 block font-semibold">Hours</span>
+</div>
+<!-- Minutes -->
+<div class="bg-gradient-to-b from-white to-ivory-100 border border-gold-400/50 rounded-2xl p-3 sm:p-5 shadow-[0_8px_20px_rgba(20,49,35,0.06)] hover:border-gold-500 transition-all hover:scale-102">
+<span class="block font-serif text-2xl sm:text-4xl md:text-5xl font-bold text-emerald-950" id="minutes">00</span>
+<span class="text-[10px] sm:text-xs uppercase tracking-wider text-gold-700 mt-1 block font-semibold">Minutes</span>
+</div>
+<!-- Seconds -->
+<div class="bg-gradient-to-b from-white to-ivory-100 border border-gold-400/50 rounded-2xl p-3 sm:p-5 shadow-[0_8px_20px_rgba(20,49,35,0.06)] hover:border-gold-500 transition-all hover:scale-102">
+<span class="block font-serif text-2xl sm:text-4xl md:text-5xl font-bold text-emerald-950" id="seconds">00</span>
+<span class="text-[10px] sm:text-xs uppercase tracking-wider text-gold-700 mt-1 block font-semibold">Seconds</span>
+</div>
+</div>
+</section>
+<!-- Gilded Filigree Divider -->
+<div class="my-10 flex items-center justify-center gap-3 max-w-sm mx-auto">
+<div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gold-400 to-gold-600"></div>
+<i class="fa-solid fa-ring text-gold-600 text-sm"></i>
+<div class="h-[1px] flex-1 bg-gradient-to-l from-transparent via-gold-400 to-gold-600"></div>
+</div>
+<!-- ============================================== -->
+<!-- 5. EVENT TIMELINE -->
+<!-- ============================================== -->
+<section class="my-12" id="timeline-section">
+<div class="text-center mb-10">
+<span class="text-xs uppercase tracking-[0.35em] font-serif text-gold-700 font-bold block mb-1">Order Of Celebration</span>
+<h2 class="font-serif text-3xl sm:text-4xl text-emerald-950 font-bold">Schedule of Events</h2>
+<p class="text-xs text-stone-600 mt-2 font-serif italic">Please join us punctually to partake in every cherished moment</p>
+</div>
+<!-- Vertical Timeline with Emerald & Gold Markers -->
+<div class="relative max-w-xl mx-auto px-4 sm:px-0">
+<!-- Central dashed line in antique gold -->
+<div class="absolute left-6 sm:left-1/2 top-4 bottom-4 w-0.5 -translate-x-1/2 border-l-2 border-dashed border-gold-400/70"></div>
+<!-- Timeline Events -->
+<div class="space-y-8 sm:space-y-12">
+<!-- Event 1: Guest Arrival -->
+<div class="relative flex flex-col sm:flex-row items-start sm:items-center group">
+<div class="pl-14 sm:pl-0 sm:w-1/2 sm:pr-10 sm:text-right order-2 sm:order-1">
+<span class="inline-block bg-ivory-200 text-emerald-950 font-serif text-xs font-bold px-3 py-1 rounded-md mb-1 border border-gold-400/50 shadow-sm">6:30 PM</span>
+<h4 class="font-serif text-lg font-bold text-emerald-950">Guest Arrival &amp; Welcome</h4>
+<p class="text-xs sm:text-sm text-stone-600 mt-0.5">Welcome mocktails, oud scents, and soulful acoustic melodies</p>
+</div>
+<div class="absolute left-6 sm:left-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-white border-2 border-emerald-900 shadow-md flex items-center justify-center z-10 order-1 sm:order-2 group-hover:scale-110 transition-transform">
+<i class="fa-solid fa-envelope-open-text text-emerald-900 text-xs"></i>
+</div>
+<div class="hidden sm:block sm:w-1/2 order-3"></div>
+</div>
+<!-- Event 2: Couple Entrance -->
+<div class="relative flex flex-col sm:flex-row items-start sm:items-center group">
+<div class="hidden sm:block sm:w-1/2 order-1"></div>
+<div class="absolute left-6 sm:left-1/2 -translate-x-1/2 w-9 h-9 rounded-full emerald-royal-bg border-2 border-gold-400 shadow-md flex items-center justify-center z-10 order-1 sm:order-2 group-hover:scale-110 transition-transform">
+<i class="fa-solid fa-crown text-gold-300 text-xs"></i>
+</div>
+<div class="pl-14 sm:pl-10 sm:w-1/2 order-2 sm:order-3">
+<span class="inline-block emerald-royal-bg text-gold-300 font-serif text-xs font-bold px-3 py-1 rounded-md mb-1 border border-gold-500/50 shadow-sm">7:00 PM</span>
+<h4 class="font-serif text-lg font-bold text-emerald-950">Grand Entrance &amp; Stage Ceremony</h4>
+<p class="text-xs sm:text-sm text-stone-600 mt-0.5">Royal entrance of Mariam &amp; Ahmed beneath the floral canopy</p>
+</div>
+</div>
+<!-- Event 3: Ring & Cake -->
+<div class="relative flex flex-col sm:flex-row items-start sm:items-center group">
+<div class="pl-14 sm:pl-0 sm:w-1/2 sm:pr-10 sm:text-right order-2 sm:order-1">
+<span class="inline-block bg-ivory-200 text-emerald-950 font-serif text-xs font-bold px-3 py-1 rounded-md mb-1 border border-gold-400/50 shadow-sm">8:00 PM</span>
+<h4 class="font-serif text-lg font-bold text-emerald-950">Cake Cutting &amp; Duas</h4>
+<p class="text-xs sm:text-sm text-stone-600 mt-0.5">Blessings prayer with elders, family toast and portrait sessions</p>
+</div>
+<div class="absolute left-6 sm:left-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-white border-2 border-emerald-900 shadow-md flex items-center justify-center z-10 order-1 sm:order-2 group-hover:scale-110 transition-transform">
+<i class="fa-solid fa-cake-candles text-emerald-900 text-xs"></i>
+</div>
+<div class="hidden sm:block sm:w-1/2 order-3"></div>
+</div>
+<!-- Event 4: Royal Dinner Feast -->
+<div class="relative flex flex-col sm:flex-row items-start sm:items-center group">
+<div class="hidden sm:block sm:w-1/2 order-1"></div>
+<div class="absolute left-6 sm:left-1/2 -translate-x-1/2 w-9 h-9 rounded-full emerald-royal-bg border-2 border-gold-400 shadow-md flex items-center justify-center z-10 order-1 sm:order-2 group-hover:scale-110 transition-transform">
+<i class="fa-solid fa-utensils text-gold-300 text-xs"></i>
+</div>
+<div class="pl-14 sm:pl-10 sm:w-1/2 order-2 sm:order-3">
+<span class="inline-block emerald-royal-bg text-gold-300 font-serif text-xs font-bold px-3 py-1 rounded-md mb-1 border border-gold-500/50 shadow-sm">8:45 PM</span>
+<h4 class="font-serif text-lg font-bold text-emerald-950">Royal Feast &amp; Banquet</h4>
+<p class="text-xs sm:text-sm text-stone-600 mt-0.5">Opulent multi-course gourmet dinner &amp; artisanal confections</p>
+</div>
+</div>
+<!-- Event 5: Celebrations & Music -->
+<div class="relative flex flex-col sm:flex-row items-start sm:items-center group">
+<div class="pl-14 sm:pl-0 sm:w-1/2 sm:pr-10 sm:text-right order-2 sm:order-1">
+<span class="inline-block bg-ivory-200 text-emerald-950 font-serif text-xs font-bold px-3 py-1 rounded-md mb-1 border border-gold-400/50 shadow-sm">10:00 PM onwards</span>
+<h4 class="font-serif text-lg font-bold text-emerald-950">Musical Evening &amp; Farewell</h4>
+<p class="text-xs sm:text-sm text-stone-600 mt-0.5">Cherished memories, photographs, and celebratory send-off</p>
+</div>
+<div class="absolute left-6 sm:left-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-white border-2 border-emerald-900 shadow-md flex items-center justify-center z-10 order-1 sm:order-2 group-hover:scale-110 transition-transform">
+<i class="fa-solid fa-music text-emerald-900 text-xs"></i>
+</div>
+<div class="hidden sm:block sm:w-1/2 order-3"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Gilded Filigree Divider -->
+<div class="my-10 flex items-center justify-center gap-3 max-w-sm mx-auto">
+<div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gold-400 to-gold-600"></div>
+<i class="fa-solid fa-compass text-gold-600 text-sm"></i>
+<div class="h-[1px] flex-1 bg-gradient-to-l from-transparent via-gold-400 to-gold-600"></div>
+</div>
+<!-- ============================================== -->
+<!-- 6. VENUE & MAP INTEGRATION -->
+<!-- ============================================== -->
+<section class="my-12" id="venue-section">
+<div class="text-center mb-8">
+<span class="text-xs uppercase tracking-[0.35em] font-serif text-gold-700 font-bold block mb-1">Destination</span>
+<h2 class="font-serif text-3xl sm:text-4xl text-emerald-950 font-bold">Venue &amp; Location</h2>
+</div>
+<div class="bg-gradient-to-br from-white via-ivory-50 to-ivory-100 rounded-3xl border border-gold-400/60 p-6 sm:p-8 md:p-10 shadow-[0_12px_32px_rgba(20,49,35,0.08)] text-center max-w-2xl mx-auto relative overflow-hidden">
+<!-- Background ornamental crest -->
+<div class="absolute -right-12 -bottom-12 opacity-5 pointer-events-none text-emerald-950">
+<i class="fa-solid fa-mosque text-9xl"></i>
+</div>
+<div class="w-16 h-16 rounded-full bg-gradient-to-br from-ivory-100 to-gold-200 text-emerald-900 border border-gold-400/60 flex items-center justify-center mx-auto mb-4 shadow-sm">
+<i class="fa-solid fa-location-dot text-2xl text-emerald-900"></i>
+</div>
+<h3 class="font-serif text-2xl font-bold text-emerald-950 mb-2">The Emerald Oasis Grand Pavilion</h3>
+<p class="text-sm font-medium text-charcoal-800 max-w-md mx-auto leading-relaxed">
+            123 Anywhere St., Any City, ST 12345 • Royal Botanical Gardens &amp; Glasshouse
+          </p>
+<div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded-full emerald-royal-bg text-gold-300 font-serif text-xs uppercase tracking-wider font-semibold border border-gold-400/60 shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all" href="https://maps.google.com/?q=123+Anywhere+St+Any+City" rel="noopener noreferrer" target="_blank">
+<i class="fa-solid fa-map-location-dot text-sm text-gold-400"></i>
+<span>Open in Google Maps</span>
+</a>
+<button class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white border border-gold-400/70 text-emerald-950 font-serif text-xs uppercase tracking-wider font-semibold shadow-sm hover:bg-ivory-100 transition-all" onclick="navigator.clipboard.writeText('123 Anywhere St., Any City, ST 12345'); alert('Venue address copied to clipboard!');">
+<i class="fa-regular fa-copy text-sm text-gold-700"></i>
+<span>Copy Address</span>
+</button>
+</div>
+</div>
+</section>
+<!-- ============================================== -->
+<!-- 7. DRESS CODE GUIDELINE NOTE -->
+<!-- ============================================== -->
+<section class="my-10 max-w-2xl mx-auto" id="dress-code-section">
+<div class="bg-gradient-to-r from-ivory-100 via-ivory-50 to-ivory-100 border-l-4 border-emerald-900 rounded-2xl p-5 sm:p-6 shadow-sm border border-gold-400/40 flex items-start gap-4">
+<div class="text-emerald-900 text-2xl pt-1">
+<i class="fa-solid fa-vest-patches"></i>
+</div>
+<div class="space-y-1">
+<h4 class="font-serif text-base font-bold text-emerald-950 uppercase tracking-wider">
+              Guest Attire &amp; Dress Code
+            </h4>
+<p class="text-xs sm:text-sm text-charcoal-800 leading-relaxed font-light">
+              Formal Traditional / Black Tie. <span class="font-semibold text-emerald-950">Kindly note:</span> To honor the couple's bespoke aesthetic, guests are warmly encouraged to wear shades of champagne gold, rich jewel tones, sage, and ivory pastels.
+            </p>
+</div>
+</div>
+</section>
+<!-- Gilded Filigree Divider -->
+<div class="my-10 flex items-center justify-center gap-3 max-w-sm mx-auto">
+<div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gold-400 to-gold-600"></div>
+<i class="fa-solid fa-feather text-gold-600 text-sm"></i>
+<div class="h-[1px] flex-1 bg-gradient-to-l from-transparent via-gold-400 to-gold-600"></div>
+</div>
+<!-- ============================================== -->
+<!-- 8. INTERACTIVE WHATSAPP RSVP & CLOSING WISH -->
+<!-- ============================================== -->
+<section class="text-center my-12 pt-4" id="rsvp-section">
+<span class="text-xs uppercase tracking-[0.35em] font-serif text-gold-700 font-bold block mb-2">Kindly Respond</span>
+<h2 class="font-serif text-3xl sm:text-4xl text-emerald-950 font-bold mb-4">Confirm Your Royal Presence</h2>
+<p class="text-xs sm:text-sm text-stone-600 max-w-md mx-auto mb-8 font-light">
+          Your presence will grace our celebration with warmth and joy. Kindly confirm your RSVP via WhatsApp by April 10th, 2028.
+        </p>
+<!-- RSVP Form Details Inputs (Interactive Builder) -->
+<div class="bg-white border border-gold-400/50 rounded-2xl p-6 max-w-md mx-auto shadow-md mb-8 text-left space-y-4">
+<div>
+<label class="block text-xs font-serif uppercase tracking-wider text-emerald-950 font-bold mb-1">Your Full Name</label>
+<input class="w-full px-3.5 py-2 text-sm border border-gold-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-900/40 bg-ivory-50/50" id="guest-name-input" placeholder="e.g. Farhan &amp; Family" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="block text-xs font-serif uppercase tracking-wider text-emerald-950 font-bold mb-1">Guests Attending</label>
+<select class="w-full px-3 py-2 text-sm border border-gold-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-900/40 bg-white" id="guest-count-input">
+<option value="1">1 Person</option>
+<option selected="" value="2">2 Persons</option>
+<option value="3">3 Persons</option>
+<option value="4">4 Persons</option>
+<option value="5+">5+ Persons</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-serif uppercase tracking-wider text-emerald-950 font-bold mb-1">Will You Attend?</label>
+<select class="w-full px-3 py-2 text-sm border border-gold-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-900/40 bg-white" id="guest-attending-input">
+<option value="Joyfully Attending">Yes, Joyfully!</option>
+<option value="Regretfully Decline">Regretfully Cannot</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Prominent Emerald Wax Seal Styled WhatsApp Button -->
+<div class="flex flex-col items-center justify-center">
+<a aria-label="RSVP on WhatsApp" class="group relative wax-seal w-32 h-32 rounded-full flex flex-col items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl focus:outline-none" href="https://wa.me/1234567890?text=Hello%2C%20I%20would%20like%20to%20confirm%20my%20attendance%20for%20the%20wedding.%0AName%3A%20%5BGuest%20Name%5D%0ANumber%20of%20Guests%3A%202%0AAttending%3A%20Joyfully%20Attending" id="whatsapp-rsvp-btn" rel="noopener noreferrer" target="_blank">
+<i class="fa-brands fa-whatsapp text-gold-300 text-3xl mb-1 drop-shadow-sm group-hover:rotate-12 transition-transform"></i>
+<span class="font-serif font-bold text-gold-300 text-sm tracking-wider uppercase drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+              RSVP
+            </span>
+<span class="text-[9px] font-sans text-gold-300/90 tracking-widest mt-0.5 uppercase font-medium">WhatsApp</span>
+</a>
+<span class="text-xs font-serif text-stone-600 mt-4 tracking-wider font-medium">
+            Click to send pre-formatted WhatsApp confirmation
+          </span>
+</div>
+<!-- Closing Blessing & Wish -->
+<div class="mt-16 pt-8 border-t border-gold-300/50 text-center space-y-3">
+<p class="font-script text-4xl sm:text-5xl text-emerald-950">
+            With Love, Prayers &amp; Gratitude
+          </p>
+<p class="font-serif text-xs uppercase tracking-[0.3em] text-gold-800 font-bold">
+            Families of Mariam &amp; Ahmed
+          </p>
+<p class="text-xs text-stone-400 font-light mt-4">
+            #MariamAndAhmed • 2028
+          </p>
+</div>
+</section>
+</div>
+</main>
+<!-- ============================================== -->
+<!-- JAVASCRIPT: LOGIC & INTERACTIONS -->
+<!-- ============================================== -->
+<script>
+    // ----------------------------------------------------
+    // 1. Interactive Envelope Opening Animation
+    // ----------------------------------------------------
+    const envelopeOverlay = document.getElementById('envelope-overlay');
+    const openEnvelopeBtn = document.getElementById('open-envelope-btn');
+    const bgAudio = document.getElementById('bg-audio');
+    const audioToggleBtn = document.getElementById('audio-toggle-btn');
+    const audioIcon = document.getElementById('audio-icon');
+    const audioTooltip = document.getElementById('audio-tooltip');
+
+    let isAudioPlaying = false;
+
+    function playAudioSafe() {
+      if (bgAudio) {
+        bgAudio.volume = 0.55;
+        const playPromise = bgAudio.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            isAudioPlaying = true;
+            updateAudioUI(true);
+          }).catch(err => {
+            console.log("Audio autoplay prevented by browser policy:", err);
+            isAudioPlaying = false;
+            updateAudioUI(false);
+          });
+        }
+      }
+    }
+
+    function toggleAudio() {
+      if (!bgAudio) return;
+      if (isAudioPlaying) {
+        bgAudio.pause();
+        isAudioPlaying = false;
+        updateAudioUI(false);
+      } else {
+        bgAudio.play().then(() => {
+          isAudioPlaying = true;
+          updateAudioUI(true);
+        }).catch(e => console.error(e));
+      }
+    }
+
+    function updateAudioUI(playing) {
+      if (playing) {
+        audioIcon.className = 'fa-solid fa-volume-high text-lg';
+        audioTooltip.textContent = 'Melody Playing';
+      } else {
+        audioIcon.className = 'fa-solid fa-volume-xmark text-lg';
+        audioTooltip.textContent = 'Unmute Melody';
+      }
+      audioTooltip.classList.remove('opacity-0');
+      setTimeout(() => audioTooltip.classList.add('opacity-0'), 2500);
+    }
+
+    if (audioToggleBtn) {
+      audioToggleBtn.addEventListener('click', toggleAudio);
+    }
+
+    if (openEnvelopeBtn) {
+      openEnvelopeBtn.addEventListener('click', () => {
+        const box = document.getElementById('envelope-box');
+        box.classList.add('envelope-opened');
+        
+        playAudioSafe();
+
+        setTimeout(() => {
+          envelopeOverlay.style.opacity = '0';
+          envelopeOverlay.style.transform = 'scale(1.08)';
+          setTimeout(() => {
+            envelopeOverlay.style.display = 'none';
+          }, 900);
+        }, 500);
+      });
+    }
+
+    // ----------------------------------------------------
+    // 2. Countdown Timer
+    // Target Date: May 01, 2028 at 19:00:00
+    // ----------------------------------------------------
+    const targetWeddingDate = new Date('May 01, 2028 19:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = targetWeddingDate - now;
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+      } else {
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+      }
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ----------------------------------------------------
+    // 3. Dynamic WhatsApp RSVP Link Generator
+    // ----------------------------------------------------
+    const guestNameInput = document.getElementById('guest-name-input');
+    const guestCountInput = document.getElementById('guest-count-input');
+    const guestAttendingInput = document.getElementById('guest-attending-input');
+    const whatsappRsvpBtn = document.getElementById('whatsapp-rsvp-btn');
+
+    let whatsappPhone = "8801357000757"; // Will be loaded from server
+
+    // Load WhatsApp number from server
+    fetch('http://localhost:3000/api/public/settings')
+      .then(response => response.json())
+      .then(data => {
+        if (data.success && data.whatsappNumber) {
+          whatsappPhone = data.whatsappNumber;
+          updateWhatsAppLink();
+          // Update floating WhatsApp contact button
+          const contactBtn = document.getElementById('whatsapp-contact-btn');
+          if (contactBtn) {
+            contactBtn.href = `https://wa.me/${whatsappPhone}`;
+          }
+        }
+      })
+      .catch(err => console.log('Using default WhatsApp number')); 
+
+    function updateWhatsAppLink() {
+      const name = (guestNameInput.value.trim()) || "[Guest Name]";
+      const count = guestCountInput.value;
+      const attending = guestAttendingInput.value;
+
+      const messageText = `Hello, I would like to confirm my attendance for Mariam & Ahmed's wedding celebration.\nName: ${name}\nNumber of Guests: ${count}\nAttending: ${attending}`;
+      const encodedMsg = encodeURIComponent(messageText);
+      whatsappRsvpBtn.href = `https://wa.me/${whatsappPhone}?text=${encodedMsg}`;
+    }
+
+    guestNameInput.addEventListener('input', updateWhatsAppLink);
+    guestCountInput.addEventListener('change', updateWhatsAppLink);
+    guestAttendingInput.addEventListener('change', updateWhatsAppLink);
+    updateWhatsAppLink();
+
+    // ----------------------------------------------------
+    // 4. Romantic Floating Gold & Ivory Petals Particle System
+    // ----------------------------------------------------
+    const canvas = document.getElementById('petals-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    // Champagne gold, ivory and soft floral tones matching illustration
+    const particleColors = ['#f5eee0', '#d4af37', '#e5c378', '#fffdfa', '#c7dcd0'];
+
+    for (let i = 0; i < 30; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: Math.random() * 7 + 4,
+        speedX: Math.random() * 1.0 - 0.5,
+        speedY: Math.random() * 0.9 + 0.4,
+        rotation: Math.random() * 360,
+        rotationSpeed: (Math.random() - 0.5) * 1.2,
+        color: particleColors[Math.floor(Math.random() * particleColors.length)],
+        opacity: Math.random() * 0.45 + 0.3,
+        isGoldGlimmer: Math.random() > 0.6
+      });
+    }
+
+    function drawParticle(p) {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate((p.rotation * Math.PI) / 180);
+      ctx.globalAlpha = p.opacity;
+      ctx.fillStyle = p.color;
+
+      if (p.isGoldGlimmer) {
+        // Shimmering diamond star
+        ctx.beginPath();
+        ctx.moveTo(0, -p.size);
+        ctx.lineTo(p.size * 0.3, -p.size * 0.3);
+        ctx.lineTo(p.size, 0);
+        ctx.lineTo(p.size * 0.3, p.size * 0.3);
+        ctx.lineTo(0, p.size);
+        ctx.lineTo(-p.size * 0.3, p.size * 0.3);
+        ctx.lineTo(-p.size, 0);
+        ctx.lineTo(-p.size * 0.3, -p.size * 0.3);
+        ctx.closePath();
+        ctx.fill();
+      } else {
+        // Delicate curved petal
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(p.size / 2, -p.size / 2, p.size, -p.size / 4, p.size, 0);
+        ctx.bezierCurveTo(p.size, p.size / 2, p.size / 2, p.size, 0, p.size * 0.8);
+        ctx.bezierCurveTo(-p.size / 3, p.size / 2, -p.size / 3, 0, 0, 0);
+        ctx.fill();
+      }
+
+      ctx.restore();
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach(p => {
+        p.x += p.speedX + Math.sin(p.y * 0.005) * 0.4;
+        p.y += p.speedY;
+        p.rotation += p.rotationSpeed;
+
+        if (p.y > height + 20) {
+          p.y = -20;
+          p.x = Math.random() * width;
+        }
+        if (p.x > width + 20) p.x = -20;
+        if (p.x < -20) p.x = width + 20;
+
+        drawParticle(p);
+      });
+
+      requestAnimationFrame(animateParticles);
+    }
+
+    animateParticles();
+  </script>
+</body></html>

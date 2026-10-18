@@ -18,15 +18,6 @@ cd "C:\Users\Adrita\Documents\wedding website"
 npm start
 ```
 
-**Server will be running at:**
-- Main Website: http://localhost:3000/index.html
-- Admin Dashboard: http://localhost:3000/admin.html
-
-### Step 2: Login to Admin Dashboard
-1. Open http://localhost:3000/admin.html in your browser
-2. **Default Login:**
-   - Username: `admin`
-   - Password: `admin123`
 3. ⚠️ **IMPORTANT**: Change this password immediately in Settings!
 
 ### Step 3: Add Your Guests
@@ -119,21 +110,7 @@ JazakAllah Khair!
 - Guests can fill their name and send confirmation
 - Pre-formatted message opens in WhatsApp Web
 
-### 3. Admin Dashboard
-- Complete guest management system
-- Secure login (username/password)
-- Send personalized invitations with one click
-- Import bulk guests via CSV
-- Update settings anytime
-
----
-
 ## 📋 Daily Workflow
-
-### Morning Routine:
-1. Start server: `npm start`
-2. Open admin dashboard: http://localhost:3000/admin.html
-3. Login with your credentials
 
 ### Adding New Guests:
 1. Click "Add Guest"
@@ -150,15 +127,6 @@ JazakAllah Khair!
 - Or press `Ctrl+C` in terminal to stop
 
 ---
-
-## 🔒 Security Checklist
-
-✅ **Change Default Password**
-1. Login to admin dashboard
-2. Go to Settings → Change Password
-3. Enter current: `admin123`
-4. Enter new password (min 6 characters)
-5. Save
 
 ✅ **Keep Data Secure**
 - Your guest data is stored in `data/guests.json`
@@ -196,41 +164,16 @@ Ayesha Khan, 8801823456789
 ---
 
 ## 🆘 Troubleshooting
-
-### Server Not Starting?
-```bash
-# Check if port 3000 is free
-netstat -ano | findstr :3000
-
-# Kill process if needed, then restart
-npm start
-```
-
 ### Can't Login?
 - Use default: `admin` / `admin123`
 - Clear browser cache
 - Check if server is running
-
-### WhatsApp Link Not Working?
-- Ensure number format: `8801357000757`
-- No + or spaces
-- Update in Settings → Save
 
 ### CSV Import Failing?
 - Check format: `Name, Phone`
 - Remove any header row
 - One guest per line
 - Comma separator
-
----
-
-## 📞 Quick Access Links
-
-- **Main Website**: http://localhost:3000/index.html
-- **Admin Dashboard**: http://localhost:3000/admin.html
-- **Your WhatsApp**: https://wa.me/8801357000757
-
----
 
 ## 🎊 You're All Set!
 
